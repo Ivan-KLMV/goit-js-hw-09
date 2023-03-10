@@ -1,4 +1,5 @@
 import flatpickr from 'flatpickr';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import 'flatpickr/dist/flatpickr.min.css';
 import '../css/02-timer.css';
 
@@ -32,7 +33,8 @@ function setDate(selectedDates) {
     selectedDate = null;
     startButton.setAttribute('disabled', true);
 
-    return window.alert('Please choose a date in the future');
+    // return window.alert('Please choose a date in the future');
+    return Notify.failure('Please choose a date in the future');
   }
 
   startButton.removeAttribute('disabled');
