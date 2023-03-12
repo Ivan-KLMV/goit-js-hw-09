@@ -13,6 +13,8 @@ const options = {
   },
 };
 const startButton = document.querySelector('[data-start]');
+startButton.setAttribute('disabled', true);
+
 const timer = {
   days: document.querySelector('[data-days]'),
   hours: document.querySelector('[data-hours]'),
@@ -31,7 +33,6 @@ function setDate(selectedDates) {
 
   if (Date.now() > selectedDate) {
     selectedDate = null;
-    startButton.setAttribute('disabled', true);
     // return window.alert('Please choose a date in the future');
     return Notify.failure('Please choose a date in the future', {
       position: 'center-top',
@@ -48,7 +49,6 @@ function setDate(selectedDates) {
 
 function startCountDawn() {
   if (selectedDate < Date.now() || isActive) {
-    console.log(Date.now());
     return;
   }
 
@@ -59,6 +59,7 @@ function startCountDawn() {
 
     if (deltaTime <= 1000) {
       isActive = false;
+      startButton.setAttribute('disabled', true);
       clearInterval(timerID);
     }
     const timeUnits = convertMs(deltaTime);
